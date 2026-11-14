@@ -84,3 +84,23 @@ body[dir=rtl] .timeline-item.reveal{transform:translate3d(24px,0,0)}
  .project-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;filter:none}}
+
+/* Timeline clipping fix: keep text inside its grid track in both LTR and RTL */
+.timeline-item{min-width:0;grid-template-columns:minmax(0,230px) minmax(0,1fr) 35px}
+.timeline-item>*{min-width:0}
+.timeline-item>div:nth-child(2){min-width:0;max-width:100%;overflow-wrap:anywhere;word-break:normal}
+.timeline-item h3,.timeline-item p{max-width:100%;overflow-wrap:anywhere;word-break:normal}
+.timeline-item:hover{padding-inline:0}
+.timeline-item.reveal,.timeline-item.reveal.is-visible,
+body[dir=rtl] .timeline-item.reveal,body[dir=rtl] .timeline-item.reveal.is-visible{transform:none;filter:none}
+.timeline-item.reveal{opacity:0;transition:opacity .65s ease}
+.timeline-item.reveal.is-visible{opacity:1}
+@media(max-width:650px){
+ .timeline-item{grid-template-columns:minmax(0,1fr) 24px;column-gap:12px;padding-inline:0}
+ .timeline-item>div:nth-child(2){grid-column:1;grid-row:2}
+ .timeline-item .timeline-date{grid-column:1/-1;grid-row:1}
+ .timeline-item .timeline-index{grid-column:2;grid-row:2}
+ .timeline-item h3{width:100%;font-size:16px;line-height:1.8;white-space:normal;overflow-wrap:anywhere}
+ .timeline-item p{width:100%;font-size:13px;line-height:1.9;white-space:normal;overflow-wrap:anywhere}
+ .timeline-item:hover{padding-inline:0}
+}
